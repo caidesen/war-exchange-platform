@@ -25,7 +25,8 @@ module.exports = {
     app: './src/main.js'
   },
   externals: {
-    'mint-ui': 'MINT'
+    'mint-ui': 'MINT',
+    'vuex': 'Vuex'
   },
   output: {
     path: config.build.assetsRoot,

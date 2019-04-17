@@ -18,12 +18,17 @@ export default {
     ItemCell
   },
   data () {
-    return {}
+    return {
+      popupVisible: false
+    }
   },
   methods: {
     ppp (id) {
-      alert(id)
+      this.popupVisible = true
     }
+  },
+  mounted () {
+    this.popupVisible = false
   }
 }
 </script>

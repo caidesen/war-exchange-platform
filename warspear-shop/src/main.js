@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import MINT from 'mint-ui'
-
+import store from './store'
 Vue.use(MINT)
 
 Vue.config.productionTip = false
@@ -29,6 +29,7 @@ Vue.filter('money', function (val) {
 new Vue({
   el: '#app',
   router,
+  store,
   components: {App},
   template: '<App/>'
 })
