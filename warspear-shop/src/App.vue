@@ -1,19 +1,31 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <item-cell @pop="ppp"></item-cell>
+    <item-cell @pop="ppp"></item-cell>
+    <item-cell @pop="ppp"></item-cell>
+    <item-cell @pop="ppp"></item-cell>
+    <item-cell @pop="ppp"></item-cell>
+    <item-cell @pop="ppp"></item-cell>
+    <div style="height: 55px;background: aqua"></div>
   </div>
 </template>
 
 <script>
-import { Indicator } from 'mint-ui'
+import ItemCell from './components/item-cell'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    ItemCell
+  },
+  data () {
+    return {}
+  },
+  methods: {
+    ppp (id) {
+      alert(id)
+    }
+  }
 }
-
-Indicator.open({
-  text: '加载中...',
-  spinnerType: 'fading-circle'
-})
 </script>
 
 <style>
@@ -21,8 +33,6 @@ Indicator.open({
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
 </style>
