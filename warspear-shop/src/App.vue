@@ -1,34 +1,30 @@
 <template>
   <div id="app">
-    <item-cell @pop="ppp"></item-cell>
-    <item-cell @pop="ppp"></item-cell>
-    <item-cell @pop="ppp"></item-cell>
-    <item-cell @pop="ppp"></item-cell>
-    <item-cell @pop="ppp"></item-cell>
-    <item-cell @pop="ppp"></item-cell>
-    <div style="height: 55px;background: aqua"></div>
+    <store></store>
+    <div style="height: 55px;"></div>
+    <my-footer></my-footer>
   </div>
 </template>
 
 <script>
-import ItemCell from './components/item-cell'
+import myFooter from './components/footer'
+import store from './components/page/store'
 export default {
   name: 'App',
   components: {
-    ItemCell
+    myFooter, store
   },
   data () {
     return {
-      popupVisible: false
+      item: {
+        id: 1,
+        srcUrl: require('@/assets/item-test.png'),
+        title: '22级蓝戒指 +2 法师用 体力',
+        tabList: ['法师', '戒指'],
+        rmb: 10.00,
+        gold: 3
+      }
     }
-  },
-  methods: {
-    ppp (id) {
-      this.popupVisible = true
-    }
-  },
-  mounted () {
-    this.popupVisible = false
   }
 }
 </script>
