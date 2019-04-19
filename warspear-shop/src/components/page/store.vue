@@ -7,11 +7,24 @@
     <item-cell :item="item"></item-cell>
     <item-cell :item="item"></item-cell>
     <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
+    <item-cell :item="item"></item-cell>
   </div>
 </template>
 
 <script>
-import ItemCell from '@/components/item-cell'
+import ItemCell from '@/components/itemCell'
 export default {
   name: 'store',
   components: {
@@ -28,7 +41,7 @@ export default {
         gold: 3
       }
     }
-  },
+  }
 }
 </script>
 

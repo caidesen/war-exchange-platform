@@ -3,8 +3,9 @@
     <div class="tab" v-for="(tab,i) in tabs" :key="i" style="font-size: 0px;" @click="handleClick(i)">
       <img :src="tab.img" alt="图片" style="height: 22px;padding-top: 7px;vertical-align: middle;"><br>
       <span v-text="tab.name" style="font-size: 12px;"></span>
-      <template v-if="tab.isaction">
-        <div style="border-radius:5px;background: gray;height: 5px;width: 10px;margin:0 auto"></div>
+      <template v-if="tab.isAction">
+        <div style="border-radius:5px;background: gray;height: 5px;width: 10px;margin:0 auto">
+        </div>
       </template>
     </div>
 
@@ -20,17 +21,20 @@ export default {
         {
           img: require('@/assets/tabbar/store.png'),
           name: '市场',
-          isaction: true
+          page: 'store',
+          isAction: true
         },
         {
           img: require('@/assets/tabbar/add.png'),
           name: '发布',
-          isaction: false
+          page: 'addItem',
+          isAction: false
         },
         {
           img: require('@/assets/tabbar/my.png'),
           name: '我的',
-          isaction: false
+          page: 'myInfo',
+          isAction: false
         }
       ]
     }
@@ -38,11 +42,12 @@ export default {
   methods: {
     handleClick (i) {
       this.clean()
-      this.tabs[i].isaction = true
+      this.tabs[i].isAction = true
+      this.$router.push(this.tabs[i].page)
     },
     clean () {
       for (let i = 0; i < this.tabs.length; i++) {
-        this.tabs[i].isaction = false
+        this.tabs[i].isAction = false
       }
     }
   }

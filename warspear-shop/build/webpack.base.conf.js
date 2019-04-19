@@ -26,6 +26,7 @@ module.exports = {
   },
   externals: {
     'mint-ui': 'MINT',
+    'vue': 'Vue',
     'vuex': 'Vuex'
   },
   output: {

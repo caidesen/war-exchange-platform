@@ -1,39 +1,83 @@
 <template>
   <div id="app">
-    <store></store>
-    <div style="height: 55px;"></div>
-    <my-footer></my-footer>
+    <template v-if="visible">
+      <div style="height: 47px"></div>
+      <div class="header">
+        <router-link class="page-back"  :to="'/'" tag="i">
+          <i class="mintui mintui-back"></i>
+        </router-link>
+        <div class="header-text">
+          {{this.$route.path}}
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <my-footer></my-footer>
+    </template>
+    <router-view></router-view>
+    <div style="height: 55px"></div>
   </div>
 </template>
 
 <script>
 import myFooter from './components/footer'
-import store from './components/page/store'
 export default {
   name: 'App',
-  components: {
-    myFooter, store
-  },
-  data () {
-    return {
-      item: {
-        id: 1,
-        srcUrl: require('@/assets/item-test.png'),
-        title: '22级蓝戒指 +2 法师用 体力',
-        tabList: ['法师', '戒指'],
-        rmb: 10.00,
-        gold: 3
+  computed: {
+    visible () {
+      let flag = true
+      let path = this.$route.path
+      if (path === '/' || path === '/store' || path === '/addItem' || path === '/myInfo') {
+        flag = false
       }
+      return flag
     }
-  }
+  },
+  components: {myFooter}
 }
 </script>
 
 <style>
+  html, body {
+    background-color: #fafafa;
+    -webkit-overflow-scrolling: touch;
+    user-select: none;
+  }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
+  }
+  .page-back {
+    display: inline-block;
+    position: absolute 12px * *10px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+  }
+  .header{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 40px;
+    background-color: #ffffff ;
+    z-index: 9999;
+  }
+  .header-text{
+    position: fixed;
+    left: 33%;
+    top: 0px;
+    width: 33%;
+    height: 40px;
+    background-color: #ffffff ;
+    z-index: 9999;
+    text-align: center;
+    line-height: 40px;
+  }
+  i {
+    font-size: 24px;
+    line-height: 40px;
   }
 </style>

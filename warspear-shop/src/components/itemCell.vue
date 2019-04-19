@@ -41,7 +41,7 @@ export default {
       // }
     }
   },
-  name: 'item-cell',
+  name: 'itemCell',
   methods: {
     handleClick () {
       this.$emit('pop', this.item.id)
