@@ -2,11 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import popupModule from './popupModule'
 import addItemModule from './addItemModule'
+import userModule from './userModule'
 Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     pageName: 'home',
-    isLogin: false
+    isLogin: true
   },
   mutations: {
     changePage (state, str) {
@@ -18,7 +19,8 @@ const store = new Vuex.Store({
   },
   modules: {
     popup: popupModule,
-    addItem: addItemModule
+    addItem: addItemModule,
+    user: userModule
   }
 })
 export default store

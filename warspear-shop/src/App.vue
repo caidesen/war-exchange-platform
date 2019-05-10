@@ -16,11 +16,13 @@
     </template>
     <router-view></router-view>
     <div style="height: 55px"></div>
+    <template v-if="!this.$store.state.isLogin"><login></login></template>
   </div>
 </template>
 
 <script>
 import myFooter from './components/footer'
+import login from '@/components/popup/login'
 export default {
   name: 'App',
   computed: {
@@ -33,7 +35,7 @@ export default {
       return flag
     }
   },
-  components: {myFooter}
+  components: {myFooter, login}
 }
 </script>
 

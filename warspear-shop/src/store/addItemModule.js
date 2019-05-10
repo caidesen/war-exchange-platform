@@ -4,7 +4,8 @@ const addItem = {
     server: '',
     exchangeType: '',
     equipmentType: '',
-    weaponType: ''
+    weaponType: '',
+    class: ''
   },
   mutations: {
     changeServer (state, newVal) {
@@ -18,6 +19,9 @@ const addItem = {
     },
     changeWeaponType (state, newVal) {
       state.weaponType = newVal
+    },
+    changeClass (state, newVal) {
+      state.class = newVal
     }
   }
 }
