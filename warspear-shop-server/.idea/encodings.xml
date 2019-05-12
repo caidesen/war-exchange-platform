@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authentication" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authentication/authentication-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authentication/authentication-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/item" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/item/item-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/item/item-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/register-server" charset="UTF-8" />
+  </component>
+</project>

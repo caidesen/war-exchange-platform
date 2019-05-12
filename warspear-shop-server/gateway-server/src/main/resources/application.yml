@@ -1,0 +1,27 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: zuul-server
+  datasource:
+    url: jdbc:mysql://106.15.181.179:3306/warshop
+    username: root
+    password: 33559874Asen.
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+zuul:
+  prefix: /api
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 5000 #超时时长
+ribbon:
+  ConnectTimeout: 1000         #连接超时时长
+  ReadTimeout: 3500            #读取超时时长
+  MaxAutoRetries: 0            #重试次数
+  MaxAutoRetriesNextServer: 0  #切换服务重试次数
