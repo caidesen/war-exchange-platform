@@ -1,11 +1,13 @@
-package xyz.warspear.authentication;
+package xyz.warspear;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
+@EnableZuulProxy
 @SpringCloudApplication
-public class AuthApplication {
+public class ZuulApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AuthApplication.class);
+        SpringApplication.run(ZuulApplication.class);
     }
 }

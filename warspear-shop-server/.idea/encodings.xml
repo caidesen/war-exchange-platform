@@ -10,5 +10,6 @@
     <file url="file://$PROJECT_DIR$/item/item-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/item/item-server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/register-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/warspear-common" charset="UTF-8" />
   </component>
 </project>

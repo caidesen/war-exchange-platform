@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="item-interface" />
         <module name="register-server" />
+        <module name="warspear-common" />
         <module name="item-server" />
         <module name="authentication-server" />
         <module name="authentication-interface" />
@@ -24,6 +25,7 @@
       <module name="item-interface" options="-parameters" />
       <module name="item-server" options="-parameters" />
       <module name="register-server" options="-parameters" />
+      <module name="warspear-common" options="-parameters" />
       <module name="warspear-shop-server-parent" options="-parameters" />
     </option>
   </component>

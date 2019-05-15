@@ -1,4 +1,4 @@
-package xyz.warspear.eureka;
+package xyz.warspear;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

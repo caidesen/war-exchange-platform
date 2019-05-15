@@ -13,6 +13,7 @@
         <module>gateway-server</module>
         <module>authentication</module>
         <module>item</module>
+        <module>warspear-common</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
