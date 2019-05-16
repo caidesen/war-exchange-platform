@@ -1,0 +1,13 @@
+server:
+  port: 8111
+spring:
+  application:
+    name: item-server
+  datasource:
+    url: jdbc:mysql://106.15.181.179:3306/warshop
+    username: root
+    password: 33559874Asen.
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka

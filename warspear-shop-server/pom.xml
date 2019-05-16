@@ -11,9 +11,10 @@
     <modules>
         <module>register-server</module>
         <module>gateway-server</module>
-        <module>authentication</module>
-        <module>item</module>
+        <module>item-server</module>
         <module>warspear-common</module>
+        <module>warspear-interface</module>
+        <module>authentication-server</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

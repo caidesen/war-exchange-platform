@@ -1,0 +1,23 @@
+server:
+  port: 8111
+spring:
+  application:
+    name: item-server
+  datasource:
+    url: jdbc:mysql://localhost/warshop?serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      open-in-view: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
