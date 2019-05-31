@@ -17,7 +17,7 @@
         </template>
       </template>
       <template v-if="$store.state.addItem.exchangeType === '账号'">
-        <mt-cell title="职业" is-link :value="$store.state.addItem.class"  @click.native="popupCurrent(isMC?p.class.mc:p.class.elf)"></mt-cell>
+        <mt-cell title="职业" is-link :value="$store.state.addItem.className"  @click.native="popupCurrent(isMC?p.className.mc:p.className.elf)"></mt-cell>
       </template>
       <mt-cell title="上传图片" is-link value="第一张将首页展示"></mt-cell>
       <mt-field label="标签" placeholder="键入标签，以空格隔开" type="text" v-model="tabs"></mt-field>
@@ -46,13 +46,13 @@ const popupDataa = {
     name: 'WeaponType',
     values: ['匕首', '双手剑', '单手剑', '双手斧', '单手斧', '单手锤', '双手锤', '战矛', '盾牌', '法杖', '弓', '弩']
   },
-  class: {
+  className: {
     elf: {
-      name: 'Class',
+      name: 'ClassName',
       values: ['看守', '双刀', '游侠', '德鲁伊', '圣骑士', '法师', '牧师', '探索者']
     },
     mc: {
-      name: 'Class',
+      name: 'ClassName',
       values: ['野蛮人', '盗贼', '萨满', '猎人', '死亡骑士', '术士', '死灵法师', '魔术师']
     }
   }

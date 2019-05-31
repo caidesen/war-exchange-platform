@@ -8,7 +8,6 @@
         </div>
       </template>
     </div>
-
   </div>
 </template>
 
@@ -22,19 +21,19 @@ export default {
           img: require('@/assets/tabbar/store.png'),
           name: '市场',
           page: 'store',
-          isAction: true
+          isAction: this.$route.path === '/store' || this.$route.path === '/'
         },
         {
           img: require('@/assets/tabbar/add.png'),
           name: '发布',
           page: 'addItem',
-          isAction: false
+          isAction: this.$route.path === '/addItem'
         },
         {
           img: require('@/assets/tabbar/my.png'),
           name: '我的',
           page: 'myInfo',
-          isAction: false
+          isAction: this.$route.path === '/myInfo'
         }
       ]
     }

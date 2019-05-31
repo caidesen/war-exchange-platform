@@ -27,7 +27,9 @@ module.exports = {
   externals: {
     'mint-ui': 'MINT',
     'vue': 'Vue',
-    'vuex': 'Vuex'
+    'vuex': 'Vuex',
+    'vue-router': 'VueRouter',
+    'axios': 'axios'
   },
   output: {
     path: config.build.assetsRoot,

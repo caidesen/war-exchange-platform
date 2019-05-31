@@ -1,5 +1,8 @@
 <template>
   <div id="store">
+    <div class="condition">
+        <mt-button size="small" style="height: 100%" plain>条件筛选</mt-button>
+    </div>
     <item-cell :item="item"></item-cell>
     <item-cell :item="item"></item-cell>
     <item-cell :item="item"></item-cell>
@@ -41,10 +44,23 @@ export default {
         gold: 3
       }
     }
+  },
+  mounted: function () {
+  },
+  methods: {
   }
 }
 </script>
 
 <style scoped>
-
+.condition{
+  position: fixed;
+  right: 0px;
+  bottom: 60px;
+  width: 60px;
+  height: 40px;
+  background-color:rgba(245,245,245,0.97) ;
+  z-index: 9999;
+  text-align: center;
+}
 </style>

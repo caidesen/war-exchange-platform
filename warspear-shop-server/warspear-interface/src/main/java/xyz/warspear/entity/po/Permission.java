@@ -18,7 +18,6 @@ public class Permission {
     @Id
     @Column(unique = true, nullable = false)
     private Integer pId;
-    private String permission;
     private String url;
     private String description;
 }

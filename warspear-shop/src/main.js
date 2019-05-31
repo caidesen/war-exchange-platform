@@ -5,7 +5,11 @@ import App from './App'
 import router from './router'
 import MINT from 'mint-ui'
 import store from './store/index'
+import axios from 'axios'
 Vue.use(MINT)
+Vue.prototype.axios = axios
+axios.defaults.headers['Content-Type'] = 'application/json'
+axios.defaults.baseURL = '/api'
 
 Vue.config.productionTip = false
 Vue.filter('money', function (val) {

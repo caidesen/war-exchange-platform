@@ -8,8 +8,8 @@ const popup = {
     weaponType: false
   },
   mutations: {
-    popupLogin (state) {
-      state.login = true
+    popupLogin (state, flag) {
+      state.login = flag
     },
     popupServer (state, flag) {
       state.server = flag

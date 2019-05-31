@@ -14,7 +14,7 @@
         <module>item-server</module>
         <module>warspear-common</module>
         <module>warspear-interface</module>
-        <module>authentication-server</module>
+        <module>user-server</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -27,7 +27,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-        <mysql.version>8.0.13</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
     </properties>
     <dependencyManagement>
         <dependencies>

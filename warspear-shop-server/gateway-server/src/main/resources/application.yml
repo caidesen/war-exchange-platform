@@ -4,9 +4,24 @@ spring:
   application:
     name: zuul-server
   datasource:
-    url: jdbc:mysql://106.15.181.179:3306/warshop
+    url: jdbc:mysql://127.0.0.1:3306/warshop
     username: root
-    password: 33559874Asen.
+    password: 123456
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 1000
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      open-in-view: true
 eureka:
   client:
     service-url:
@@ -14,9 +29,12 @@ eureka:
 zuul:
   prefix: /api
   routes:
-    auth-server:
+    user-server:
       path: /auth/**
-      serverId: AUTH-SERVER
+      serverId: USER-SERVER
+    item-server:
+      path: /item/**
+      serverId: ITEM-SERVER
 hystrix:
   command:
     default:

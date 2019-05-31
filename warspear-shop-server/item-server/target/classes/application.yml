@@ -4,9 +4,24 @@ spring:
   application:
     name: item-server
   datasource:
-    url: jdbc:mysql://106.15.181.179:3306/warshop
+    url: jdbc:mysql://localhost/warshop?serverTimezone=Asia/Shanghai
     username: root
-    password: 33559874Asen.
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      open-in-view: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 1000
+    password:
 eureka:
   client:
     service-url:

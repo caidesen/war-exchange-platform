@@ -36,6 +36,8 @@ public class Item {
     private String tag;
     @Column(columnDefinition = "TEXT")
     private String description;
+    private Integer priceGold;
+    private Integer priceRMB;
     //修改时间
     @LastModifiedDate
     @Column(nullable = false)

@@ -3,11 +3,9 @@
     <template v-if="visible">
       <div style="height: 47px"></div>
       <div class="header">
-        <router-link class="page-back"  :to="'/'" tag="i">
-          <i class="mintui mintui-back"></i>
-        </router-link>
+        <i class="mintui mintui-back page-back" @click="back"></i>
         <div class="header-text">
-          {{this.$route.path}}
+          {{$store.state.title}}
         </div>
       </div>
     </template>
@@ -33,6 +31,11 @@ export default {
         flag = false
       }
       return flag
+    }
+  },
+  methods: {
+    back () {
+      this.$router.go(-1)
     }
   },
   components: {myFooter, login}
@@ -81,5 +84,8 @@ export default {
   i {
     font-size: 24px;
     line-height: 40px;
+  }
+  .errorToast{
+    z-index: 2007;
   }
 </style>

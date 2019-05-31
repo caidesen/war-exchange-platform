@@ -17,6 +17,11 @@ spring:
       hibernate:
         format_sql: true
       open-in-view: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 1000
+    password:
 eureka:
   client:
     service-url:

@@ -9,8 +9,8 @@
         <module name="register-server" />
         <module name="warspear-interface" />
         <module name="warspear-common" />
+        <module name="user-server" />
         <module name="item-server" />
-        <module name="authentication-server" />
         <module name="gateway-server" />
       </profile>
     </annotationProcessing>
@@ -21,11 +21,11 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="authentication-server" options="-parameters" />
       <module name="gateway-server" options="-parameters" />
       <module name="item-interface" options="-parameters" />
       <module name="item-server" options="-parameters" />
       <module name="register-server" options="-parameters" />
+      <module name="user-server" options="-parameters" />
       <module name="warspear-common" options="-parameters" />
       <module name="warspear-interface" options="-parameters" />
     </option>
