@@ -9,9 +9,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import xyz.warspear.gateway.filter.AuthorizationFilter;
-import xyz.warspear.gateway.filter.LoginFilter;
-import xyz.warspear.gateway.filter.LogoutFilter;
+import xyz.warspear.gateway.filter.*;
 
 
 @EnableZuulProxy
@@ -37,5 +35,13 @@ public class ZuulApplication {
     @Bean
     public LogoutFilter logoutFilter() {
         return new LogoutFilter();
+    }
+    @Bean
+    public CorsPostFilter corsPostFilter() {
+        return new CorsPostFilter();
+    }
+    @Bean
+    public CorsPreFilter corsPreFilter() {
+        return new CorsPreFilter();
     }
 }

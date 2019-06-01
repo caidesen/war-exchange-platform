@@ -6,6 +6,8 @@ import com.netflix.zuul.exception.ZuulException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import xyz.warspear.entity.po.User;
+import xyz.warspear.enums.ExceptionEnums;
+import xyz.warspear.exception.WarException;
 import xyz.warspear.gateway.domain.UserInRds;
 import xyz.warspear.repository.UserRepository;
 import xyz.warspear.utils.JWTUtils;
@@ -31,7 +33,7 @@ public class LoginFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -49,12 +51,19 @@ public class LoginFilter extends ZuulFilter {
     @Transactional
     public Object run() throws ZuulException {
         RequestContext currentContext = RequestContext.getCurrentContext();
+        //如果已经有其他过滤器介入处理了，直接结束方法
+        if (currentContext.get("processed") != null)
+            return null;
         HttpServletRequest request = currentContext.getRequest();
         HttpServletResponse response = currentContext.getResponse();
         //通知其他过滤器已经进行处理
         currentContext.set("processed");
         //不进行路由
         currentContext.setSendZuulResponse(false);
+        //设置源站
+        response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
+        //如果服务端指定了具体的域名而非“*”，那么响应首部中的 Vary 字段的值必须包含 Origin
+        response.setHeader("Vary","Origin,Access-Control-Request-Method,Access-Control-Request-Headers");
         //若不是post提交的返回错误信息
         if (!request.getMethod().equals("POST")) {
             throw new ZuulException("", 405, "请求类型错误");

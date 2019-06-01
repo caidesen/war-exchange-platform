@@ -24,7 +24,7 @@ public class AuthorizationFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -39,6 +39,8 @@ public class AuthorizationFilter extends ZuulFilter {
         if (requestURI.matches("/api/auth/verify"))
             return false;
         if (requestURI.matches("/api/auth/checkUsername"))
+            return false;
+        if (requestURI.matches("/api/item/items/page/[0-9]*/size/[0-9]*"))
             return false;
         return true;
     }

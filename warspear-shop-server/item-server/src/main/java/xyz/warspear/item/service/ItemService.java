@@ -2,7 +2,6 @@ package xyz.warspear.item.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -13,11 +12,7 @@ import xyz.warspear.entity.dto.ItemDetailedDto;
 import xyz.warspear.entity.dto.ItemSimpleDto;
 import xyz.warspear.entity.po.Item;
 import xyz.warspear.repository.ItemRepository;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +57,7 @@ public class ItemService {
                 predicates.add(criteriaBuilder.like(root.get("title"), "%" + conditions.getTitle() + "%"));
             if (StringUtils.isNotBlank(conditions.getServer()))
                 predicates.add(criteriaBuilder.equal(root.get("server"), conditions.getServer()));
+            //如果没有值，赋值为零；如果值为0，不作为查询条件
             if (Optional.ofNullable(conditions.getIsSell()).orElse(0) != 0)
                 predicates.add(criteriaBuilder.equal(root.get("isSell"), conditions.getIsSell() == 1));
             if (StringUtils.isNotBlank(conditions.getExchangeType()))

@@ -23,7 +23,7 @@ public class LogoutFilter extends ZuulFilter {
 
     @Override
     public int filterOrder() {
-        return 0;
+        return 1;
     }
 
     @Override
@@ -37,6 +37,9 @@ public class LogoutFilter extends ZuulFilter {
     @Override
     public Object run() throws ZuulException {
         RequestContext currentContext = RequestContext.getCurrentContext();
+        //如果已经有其他过滤器介入处理了，直接结束方法
+        if (currentContext.get("processed") != null)
+            return null;
         HttpServletRequest request = currentContext.getRequest();
         HttpServletResponse response = currentContext.getResponse();
         //通知其他过滤器已经进行处理
@@ -49,11 +52,15 @@ public class LogoutFilter extends ZuulFilter {
             throw new ZuulException("", 401, "未登录！");
         String username = JWTUtils.getUsername(token);
         //缓存中没有
-        if(redisUtils.hasKey(username))
+        if(!redisUtils.hasKey(username))
             throw new ZuulException("", 200, "登录已经失效");
         //删除缓存
         redisUtils.del(username);
         currentContext.setResponseStatusCode(200);
+        //指定源站
+        response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
+        //如果服务端指定了具体的域名而非“*”，那么响应首部中的 Vary 字段的值必须包含 Origin
+        response.setHeader("Vary","Origin,Access-Control-Request-Method,Access-Control-Request-Headers");
         return null;
     }
 }
