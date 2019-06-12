@@ -3,7 +3,6 @@ package xyz.warspear.entity.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 import xyz.warspear.entity.po.Item;
 import xyz.warspear.entity.po.Pic;
 
@@ -20,17 +19,20 @@ public class ItemDetailedDto implements Serializable {
     private Integer itemId;
     private String title;
     private String server;
-    private boolean isSell;
+    private String exchangeRelationship;
+    private boolean emailBindingState;
+    private String faction;
     private String exchangeType;
     private String equipmentType;
     private String weaponType;
     private String className;
-    private String tag;
+    private String[] tags;
     private String description;
     private Date createTime;
     private List<String> pics = new ArrayList<>();
     private String username;
     private Integer userId;
+    private String qqNum;
     private Integer priceGold;
     private Integer priceRMB;
 
@@ -38,21 +40,25 @@ public class ItemDetailedDto implements Serializable {
         this.itemId = item.getItemId();
         this.title = item.getTitle();
         this.server = item.getServer();
-        this.isSell = item.isSell();
+        this.exchangeRelationship = item.getExchangeRelationship();
+        this.emailBindingState = item.isEmailBindingState();
+        this.faction = item.getFaction();
         this.exchangeType = item.getExchangeType();
         this.equipmentType = item.getEquipmentType();
         this.weaponType = item.getWeaponType();
         this.className = item.getClassName();
-        this.tag = item.getTag();
+        if (item.getTags() != null)
+            this.tags = item.getTags().split("\\s+");
         this.description = item.getDescription();
         this.createTime = item.getCreateTime();
         this.userId = item.getUser().getUserId();
         this.username = item.getUser().getUsername();
+        this.qqNum = item.getUser().getQqNum();
         this.priceGold = item.getPriceGold();
         this.priceRMB = item.getPriceRMB();
         List<Pic> pics = item.getPics();
         for (Pic pic : pics) {
-            this.pics.add(pic.getPicUrl());
+            this.pics.add(pic.getPicUri());
         }
     }
 

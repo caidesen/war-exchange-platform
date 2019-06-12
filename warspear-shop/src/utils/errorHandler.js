@@ -9,6 +9,11 @@ export default function (error) {
         className: 'errorToast'
       })
     } else {
+      Toast({
+        message: '没有登录或已过期',
+        duration: 1500,
+        className: 'errorToast'
+      })
       store.commit('changeLogin', false)
       localStorage.clear()
     }

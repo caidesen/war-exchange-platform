@@ -12,8 +12,9 @@
     <template v-else>
       <my-footer></my-footer>
     </template>
-    <router-view></router-view>
-    <div style="height: 55px"></div>
+    <keep-alive exclude="itemDetailed">
+      <router-view></router-view>
+    </keep-alive>
     <template v-if="!this.$store.state.isLogin"><login></login></template>
   </div>
 </template>
@@ -86,6 +87,6 @@ export default {
     line-height: 40px;
   }
   .errorToast{
-    z-index: 2007;
+    z-index: 9999;
   }
 </style>

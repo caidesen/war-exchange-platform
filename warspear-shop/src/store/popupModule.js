@@ -1,27 +1,11 @@
 const popup = {
   namespaced: true,
   state: {
-    login: false,
-    server: false,
-    exchangeType: false,
-    equipmentType: false,
-    weaponType: false
+    login: false
   },
   mutations: {
     popupLogin (state, flag) {
       state.login = flag
-    },
-    popupServer (state, flag) {
-      state.server = flag
-    },
-    popupExchangeType (state, flag) {
-      state.exchangeType = flag
-    },
-    popupEquipmentType (state, flag) {
-      state.equipmentType = flag
-    },
-    popupWeaponType (state, flag) {
-      state.weaponType = flag
     }
   }
 }

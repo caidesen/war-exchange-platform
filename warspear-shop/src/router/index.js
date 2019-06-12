@@ -1,14 +1,16 @@
 import Router from 'vue-router'
-import register from '@/components/page/register'
-import store from '@/components/page/store'
-import myinfo from '@/components/page/myinfo'
-import addItem from '@/components/page/addItem'
-import updateUserInfo from '@/components/page/updateUserInfo'
-import updateUserPassword from '@/components/page/updateUserPassword'
 import $store from '@/store/index'
-
+const register = () => import('@/components/page/register')
+const store = () => import(/* webpackChunkName: "group-home" */ '@/components/page/store')
+const myinfo = () => import(/* webpackChunkName: "group-home" */ '@/components/page/myinfo')
+const addItem = () => import(/* webpackChunkName: "group-home" */ '@/components/page/addItem')
+const updateUserInfo = () => import('@/components/page/updateUserInfo')
+const updateUserPassword = () => import('@/components/page/updateUserPassword')
+const uploadPics = () => import('@/components/page/uploadPics')
+const itemDetailed = () => import('@/components/page/itemDetailed')
+const condition = () => import('@/components/page/condition')
+const myitem = () => import('@/components/page/myitem')
 let router = new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -58,15 +60,36 @@ let router = new Router({
         title: '修改密码'
       },
       component: updateUserPassword
+    },
+    {
+      path: '/uploadPics',
+      meta: {
+        title: '上传图片'
+      },
+      component: uploadPics
+    },
+    {
+      path: '/itemDetailed.vue',
+      meta: {
+        title: '详情页'
+      },
+      component: itemDetailed
+    },
+    {
+      path: '/condition',
+      meta: {
+        title: '查询条件'
+      },
+      component: condition
+    },
+    {
+      path: '/myitem',
+      meta: {
+        title: '我的发布'
+      },
+      component: myitem
     }
-  ],
-  scrollBehavior (to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return { x: 20, y: 0 }
-    }
-  }
+  ]
 })
 router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title

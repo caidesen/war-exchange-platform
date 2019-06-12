@@ -6,15 +6,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto implements Serializable {
+public class PicDto implements Serializable {
+    private Integer picId;
+    private String picUri;
     private Integer userId;
-    private String username;
-    private String email;
-    private String qqNum;
-    private String description;
-    private boolean state;
+
+    public PicDto(String picUri, Integer userId) {
+        this.picUri = picUri;
+        this.userId = userId;
+    }
 }

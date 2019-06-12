@@ -93,7 +93,7 @@ public class LoginFilter extends ZuulFilter {
         response.addHeader("token", token);
         //加入缓存
         UserInRds userInRds = new UserInRds(user, password);
-        redisUtils.set(usernameInDB, userInRds, 60 * 30);
+        redisUtils.set(usernameInDB, userInRds, 60 * 60);
         return null;
     }
 }

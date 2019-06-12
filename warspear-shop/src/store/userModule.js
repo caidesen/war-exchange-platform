@@ -1,5 +1,6 @@
 import axios from 'axios'
 import errorHandler from '@/utils/errorHandler'
+import { Toast } from 'mint-ui'
 const user = {
   namespaced: true,
   state: {
@@ -63,6 +64,7 @@ const user = {
       }).then((response) => {
         context.commit('changeUser', response.data.data)
         this.commit('changeLogin', true)
+        Toast('登录成功')
       }).catch((e) => {
         errorHandler(e)
       })

@@ -17,7 +17,7 @@ const versionRequirements = [
 ]
 
 if (shell.which('npm')) {
-  versionRequirements.push({
+  versionRequirements.pushItem({
     name: 'npm',
     currentVersion: exec('npm --version'),
     versionRequirement: packageConfig.engines.npm
@@ -31,7 +31,7 @@ module.exports = function () {
     const mod = versionRequirements[i]
 
     if (!semver.satisfies(mod.currentVersion, mod.versionRequirement)) {
-      warnings.push(mod.name + ': ' +
+      warnings.pushItem(mod.name + ': ' +
         chalk.red(mod.currentVersion) + ' should be ' +
         chalk.green(mod.versionRequirement)
       )

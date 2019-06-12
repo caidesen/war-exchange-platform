@@ -9,7 +9,8 @@ import axios from 'axios'
 Vue.use(MINT)
 Vue.prototype.axios = axios
 axios.defaults.headers['Content-Type'] = 'application/json'
-axios.defaults.baseURL = '/api'
+// axios.defaults.baseURL = 'http://127.0.0.1/api'
+axios.defaults.baseURL = 'http://192.168.1.100/api'
 
 Vue.config.productionTip = false
 Vue.filter('money', function (val) {

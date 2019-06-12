@@ -9,8 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ConditionsDto {
     private String title;
+    private String faction;
     private String server;
-    private Integer isSell;
+    private String exchangeRelationship;
     private String exchangeType;
     private String equipmentType;
     private String weaponType;

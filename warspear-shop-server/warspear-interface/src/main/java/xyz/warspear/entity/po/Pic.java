@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Setter
@@ -14,8 +15,7 @@ public class Pic {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer picId;
-    private String picUrl;
-    private Integer state;
+    private String picUri;
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

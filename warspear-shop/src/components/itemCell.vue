@@ -2,22 +2,27 @@
   <mt-cell @click.native="handleClick">
     <template v-slot:title>
       <div class="p img-d">
-        <img :src="item.srcUrl" alt="图片">
+        <img :src="item.firstPic" alt="图片">
       </div>
       <div class="p content">
+        <span class="small">
+          <span class="title" style="color: midnightblue">[{{item.server}}.{{item.faction}}]</span>
+          <span class="title" style="color: red">[{{item.exchangeRelationship==='卖'?'出':'收'}}]</span>
+        </span>
         <span class="title">{{item.title}}</span>
         <div class="tabbar">
-          <span class="tab" v-for="(tab,i) in item.tabList" :key="i">
+          <span class="tab" v-for="(tab,i) in item.tags" :key="i">
             {{tab}}
           </span>
         </div>
         <div class="p">
-          <span class="rmb">{{item.rmb | money}} CNY</span>
-          <span class="tab"> or</span>
-          <span class="gold"> {{item.gold}}k gold</span>
+          <span v-if="item.priceRMB!=null" class="rmb">{{item.priceRMB}} CNY</span>
+          <span v-if="!(item.priceRMB==null||item.priceGold==null)" class="tab"> or</span>
+          <span v-if="item.priceGold!=null" class="gold"> {{item.priceGold}}k gold</span>
         </div>
-        <span class="master">us.asen</span>
+        <span class="master">{{item.username}}</span>
       </div>
+
     </template>
   </mt-cell>
 </template>
@@ -27,24 +32,17 @@ export default {
   props: {
     item: {
       type: Object
-      // default: function () {
-      //   return {
-      //     id: 1,
-      //     srcUrl: require('@/assets/item-test.png'),
-      //     title: '22级蓝戒指 +2 法师用 体力',
-      //     tabList: function () {
-      //       return ['法师', '戒指']
-      //     },
-      //     rmb: 10.00,
-      //     gold: 3
-      //   }
-      // }
+    }
+  },
+  data () {
+    return {
     }
   },
   name: 'itemCell',
   methods: {
     handleClick () {
-      this.$emit('pop', this.item.id)
+      this.$store.commit('findItem/changeItemId', this.item.itemId)
+      this.$router.push('/itemDetailed.vue')
     }
   }
 }
@@ -52,7 +50,9 @@ export default {
 
 <style scoped>
   img {
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+
   }
 
   .p {
@@ -88,11 +88,16 @@ export default {
 
   .content {
     height: 6rem;
+    width: 100%;
   }
 
   .img-d {
     width: 6rem;
-    height: 6rem;
+    height: 7rem;
     float: left;
+    text-align: center;
+  }
+  .small {
+    font-size: 10px;
   }
 </style>

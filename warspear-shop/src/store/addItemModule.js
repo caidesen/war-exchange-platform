@@ -1,11 +1,12 @@
 const addItem = {
   namespaced: true,
   state: {
-    server: '',
-    exchangeType: '',
-    equipmentType: '',
-    weaponType: '',
-    className: ''
+    server: undefined,
+    exchangeType: undefined,
+    equipmentType: undefined,
+    weaponType: undefined,
+    className: undefined,
+    pics: undefined
   },
   mutations: {
     changeServer (state, newVal) {
@@ -22,6 +23,16 @@ const addItem = {
     },
     changeClassName (state, newVal) {
       state.className = newVal
+    },
+    changePics (state, newVal) {
+      state.pics = newVal
+    },
+    clear (state) {
+      state.server = undefined
+      state.exchangeType = undefined
+      state.equipmentType = undefined
+      state.weaponType = undefined
+      state.weaponType = undefined
     }
   }
 }

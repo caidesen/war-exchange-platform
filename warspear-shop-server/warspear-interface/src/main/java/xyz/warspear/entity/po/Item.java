@@ -28,12 +28,15 @@ public class Item {
     @Column(nullable = false)
     private String server;
     @Column(nullable = false)
-    private boolean isSell;
+    private String exchangeRelationship;
+    @Column(nullable = false)
+    private String faction;
+    private boolean emailBindingState;
     private String exchangeType;
     private String equipmentType;
     private String weaponType;
     private String className;
-    private String tag;
+    private String tags;
     @Column(columnDefinition = "TEXT")
     private String description;
     private Integer priceGold;

@@ -29,7 +29,8 @@ module.exports = {
     'vue': 'Vue',
     'vuex': 'Vuex',
     'vue-router': 'VueRouter',
-    'axios': 'axios'
+    'axios': 'axios',
+    'ali-oss': 'ali-oss'
   },
   output: {
     path: config.build.assetsRoot,

@@ -44,6 +44,10 @@ public class LogoutFilter extends ZuulFilter {
         HttpServletResponse response = currentContext.getResponse();
         //通知其他过滤器已经进行处理
         currentContext.set("processed");
+        //指定源站
+        response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
+        //如果服务端指定了具体的域名而非“*”，那么响应首部中的 Vary 字段的值必须包含 Origin
+        response.setHeader("Vary","Origin,Access-Control-Request-Method,Access-Control-Request-Headers");
         //不进行路由
         currentContext.setSendZuulResponse(false);
         String token = request.getHeader("token");
@@ -57,10 +61,6 @@ public class LogoutFilter extends ZuulFilter {
         //删除缓存
         redisUtils.del(username);
         currentContext.setResponseStatusCode(200);
-        //指定源站
-        response.setHeader("Access-Control-Allow-Origin",request.getHeader("Origin"));
-        //如果服务端指定了具体的域名而非“*”，那么响应首部中的 Vary 字段的值必须包含 Origin
-        response.setHeader("Vary","Origin,Access-Control-Request-Method,Access-Control-Request-Headers");
         return null;
     }
 }

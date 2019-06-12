@@ -1,6 +1,5 @@
 package xyz.warspear;
 
-import com.auth0.jwt.JWT;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -28,20 +27,29 @@ public class ZuulApplication {
     public LoginFilter loginFilter() {
         return new LoginFilter();
     }
+
     @Bean
     public AuthorizationFilter authorizationFilter() {
         return new AuthorizationFilter();
     }
+
     @Bean
     public LogoutFilter logoutFilter() {
         return new LogoutFilter();
     }
+
     @Bean
     public CorsPostFilter corsPostFilter() {
         return new CorsPostFilter();
     }
+
     @Bean
     public CorsPreFilter corsPreFilter() {
         return new CorsPreFilter();
     }
+    //
+    //@Bean
+    //public WarErrorFilter corsErrorFilter() {
+    //    return new WarErrorFilter();
+    //}
 }

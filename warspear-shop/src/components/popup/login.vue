@@ -34,11 +34,6 @@ export default {
       isRememberMe: true
     }
   },
-  computed: {
-    popupVisible () {
-      return this.$store.state.popup.login
-    }
-  },
   watch: {
     /**
      * 校验用户名

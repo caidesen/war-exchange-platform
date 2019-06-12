@@ -34,13 +34,17 @@ public class AuthorizationFilter extends ZuulFilter {
         String requestURI = request.getRequestURI();
         if (requestURI.matches("/api/auth/images/captcha/[0-9]*"))
             return false;
-        if (requestURI.matches("/api/auth/user") || request.getMethod() == "POST")
+        if (requestURI.matches("/api/auth/user") && request.getMethod().equals("POST"))
             return false;
         if (requestURI.matches("/api/auth/verify"))
             return false;
         if (requestURI.matches("/api/auth/checkUsername"))
             return false;
         if (requestURI.matches("/api/item/items/page/[0-9]*/size/[0-9]*"))
+            return false;
+        if (requestURI.matches("/api/item/detail/[0-9]*"))
+            return false;
+        if (requestURI.matches("/api/auth/activation/.*"))
             return false;
         return true;
     }
@@ -53,6 +57,8 @@ public class AuthorizationFilter extends ZuulFilter {
             return null;
         HttpServletRequest request = currentContext.getRequest();
         HttpServletResponse response = currentContext.getResponse();
+        //设置源站
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         String token = request.getHeader("token");
         //未携带token
         if (token == null || token.equals(""))
@@ -65,7 +71,7 @@ public class AuthorizationFilter extends ZuulFilter {
         if (user == null)
             throw new ZuulException("", 402, "登录已过期或已退出登录");
         //token过期
-        if (JWTUtils.verify(token, username, user.getPassword())){
+        if (JWTUtils.verify(token, username, user.getPassword())) {
             token = JWTUtils.creat(username, user.getPassword());
             response.addHeader("token", token);
         }
@@ -74,18 +80,18 @@ public class AuthorizationFilter extends ZuulFilter {
         boolean flag = false;
         List<String> permissions = user.getPermissions();
         for (String permission : permissions) {
-            if (requestURI.matches(permission)){
+            if (requestURI.matches(permission)) {
                 flag = true;
             }
         }
-        if(flag)
+        if (flag)
             currentContext.setSendZuulResponse(true);
-        else{
+        else {
             currentContext.setSendZuulResponse(false);
             throw new ZuulException("", 401, "没有权限");
         }
         //刷新缓存
-        redisUtils.expire(username,60 * 30);
+        redisUtils.expire(username, 60 * 30);
         return null;
     }
 }

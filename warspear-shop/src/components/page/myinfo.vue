@@ -8,7 +8,7 @@
       <br>
       <mt-button type="primary" size="large" @click="updateUserPassword">修改登录密码</mt-button>
       <br>
-      <mt-button type="primary" size="large" @click="loginPop">我的发布</mt-button>
+      <mt-button type="primary" size="large" @click="$router.push('/myitem')">我的发布</mt-button>
       <br>
       <mt-button type="primary" size="large" @click="logout">退出登录</mt-button>
 
@@ -55,6 +55,7 @@ export default {
         headers: {'token': this.$store.state.user.token}
       }).then(() => {
         this.$store.commit('changeLogin', false)
+        localStorage.clear()
         Toast({
           message: '操作成功',
           iconClass: 'icon icon-success'

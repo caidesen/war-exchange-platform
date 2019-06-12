@@ -23,6 +23,9 @@ export default {
     },
     name: {
       type: String
+    },
+    spaceName: {
+      type: String
     }
   },
   data () {
@@ -43,7 +46,7 @@ export default {
   },
   methods: {
     change (picker, values) {
-      this.$store.commit('addItem/change' + this.name, values[0])
+      this.$store.commit(this.spaceName + '/change' + this.name, values[0])
     }
   },
   watch: {
