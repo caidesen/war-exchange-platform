@@ -24,6 +24,7 @@ public enum ExceptionEnums {
     FAIL_CLASS_NAME(400, "错误的职业"),
     PRICE_IS_EMPTY(400, "不能两个价格都为空"),
     PIC_ERROR(400, "图片不存在"),
+    NEED_PIC(400,"至少需要一张图片"),
     FAIL_PRICE(400, "错误的价格信息"),
     EMAIL_SERVER_FAILED(500, "邮箱服务错误"),
     EXPIRATION(400, "过期");

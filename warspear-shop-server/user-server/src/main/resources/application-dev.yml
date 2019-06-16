@@ -1,0 +1,32 @@
+server:
+  port: 8110
+spring:
+  mail:
+    host: smtp.163.com
+    username: warspearquan@163.com
+    password: warspearquan123
+    default-encoding: utf-8
+  application:
+    name: user-server
+  datasource:
+    url: jdbc:mysql://rm-uf66k9xg41auipokuvo.mysql.rds.aliyuncs.com/warshop?serverTimezone=Asia/Shanghai
+    username: root
+    password: 33559874Asen.
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 1000
+    password:
+  thymeleaf:
+    encoding: utf-8
+    cache: false
+    prefix: classpath:/templates/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka

@@ -28,6 +28,6 @@ public class AuthApplication {
 
     @Bean
     public ExecutorService emailThreadPool(){
-        return Executors.newSingleThreadExecutor();
+        return Executors.newFixedThreadPool(2);
     }
 }

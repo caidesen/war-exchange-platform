@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -48,11 +49,11 @@ public class UserService {
     @Autowired
     private TemplateEngine templateEngine;
 
-    @Autowired
     //用于发送文件
-            JavaMailSender javaMailSender;
+    @Autowired
+    JavaMailSender javaMailSender;
 
-    final Base64.Encoder encoder = Base64.getEncoder();
+    private final Base64.Encoder encoder = Base64.getEncoder();
 
     public User FindByUsername(String username) {
         return userRepository.findByUsername(username);
@@ -149,25 +150,31 @@ public class UserService {
                 throw new WarException(ExceptionEnums.EMAIL_SERVER_FAILED);
             }
             //发送邮件
-            javaMailSender.send(mimeMessage);
-            //存入redis
-            redisUtils.set(key, user.getUserId(), 60 * 60 * 24);
-
-            log.info("用户" + user.getUsername() + "邮件发送成功");
+            try {
+                javaMailSender.send(mimeMessage);
+                redisUtils.set(key, user.getUserId(), 60 * 60 * 24);
+                log.info("用户" + user.getUsername() + "邮件发送成功");
+            } catch (MailException e) {
+                log.warn("邮件发送失败:" + e.getMessage());
+            }
         });
     }
 
-    public void verifyActivationKey(String key) {
+    public String verifyActivationKey(String key) {
         // 在缓存中找，没有就是过期
         Integer userId = (Integer) redisUtils.get(key);
-        if (userId == null)
-            throw new WarException(ExceptionEnums.EXPIRATION);
-        // 更改用户的角色
-        User user = userRepository.getOne(userId);
-        Role role = roleRepository.getOne(1);
-        user.setRole(role);
-        userRepository.save(user);
-        //删除redis中的数据
-        redisUtils.del(key);
+        String username = null;
+        if (userId != null) {
+            // 更改用户的角色
+            User user = userRepository.getOne(userId);
+            username = user.getUsername();
+            // 1 是激活用户的角色
+            Role role = roleRepository.getOne(1);
+            user.setRole(role);
+            userRepository.save(user);
+            //删除redis中的数据
+            redisUtils.del(key);
+        }
+        return username;
     }
 }

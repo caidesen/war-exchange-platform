@@ -1,6 +1,7 @@
 package xyz.warspear.user.config;
 
 import com.UpYun;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,18 +12,22 @@ import xyz.warspear.repository.UserRepository;
 import javax.transaction.Transactional;
 
 @Component
-public class MyUpyun {
+public class MyUpyunConfig {
     @Autowired
     UserRepository userRepository;
 
-    private UpYun upYun;
+    @Getter
+    private String username;
+    @Getter
+    private String password;
 
+    @Bean
     @Transactional
-    public UpYun getUpYun() {
-        if (upYun == null) {
-            User user = userRepository.getOne(2);
-            upYun = new UpYun("warshop", user.getUsername(), user.getPassword());
-        }
+    public UpYun myUpYun() {
+        User user = userRepository.getOne(1);
+        username = user.getUsername();
+        password = user.getPassword();
+        UpYun upYun = new UpYun("warshop", user.getUsername(), user.getPassword());
         return upYun;
     }
 }

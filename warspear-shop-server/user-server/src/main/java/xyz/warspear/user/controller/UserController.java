@@ -1,26 +1,26 @@
 package xyz.warspear.user.controller;
 
 
-import org.json.HTTP;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import xyz.warspear.dto.CommonResponseEntity;
 import xyz.warspear.entity.dto.UserDto;
 import xyz.warspear.entity.po.User;
 import xyz.warspear.enums.ExceptionEnums;
 import xyz.warspear.exception.WarException;
-import xyz.warspear.repository.UserRepository;
 import xyz.warspear.user.service.CaptchaService;
 import xyz.warspear.user.service.UserService;
-import xyz.warspear.utils.JWTUtils;
 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 @RestController
 public class UserController {
@@ -134,11 +134,15 @@ public class UserController {
      * @return
      */
     @GetMapping("/activation")
-    public CommonResponseEntity<String> activation(String key) {
-        userService.verifyActivationKey(key);
-        return new CommonResponseEntity<>("激活成功");
+    public ResponseEntity<String> activation(String key) {
+        String s = userService.verifyActivationKey(key);
+        HashMap<String, Object> model = new HashMap<>();
+        if (!StringUtils.isNotBlank(s)) {
+            return ResponseEntity.ok().body("链接已经过期，可能已经激活");
+        }
+        model.put("username",s);
+        return ResponseEntity.ok("恭喜，亲爱的" + s + "，你在战矛圈的账号已经激活成功！请退出后重新登录以刷新凭证");
     }
-    @ResponseBody
     @GetMapping("/activation/resend/email")
     public CommonResponseEntity<String> resendAcitvationEmail(HttpServletRequest request) {
         String token = request.getHeader("token");

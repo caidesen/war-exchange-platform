@@ -1,0 +1,46 @@
+server:
+  port: 80
+spring:
+  application:
+    name: zuul-server
+  datasource:
+    url: jdbc:mysql://rm-uf66k9xg41auipoku.mysql.rds.aliyuncs.com/warshop?serverTimezone=Asia/Shanghai
+    username: root
+    password: 33559874Asen-
+  redis:
+    host: 172.17.0.1
+    port: 6379
+    timeout: 1000
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+zuul:
+  prefix: /api
+  routes:
+    user-server:
+      path: /auth/**
+      serverId: USER-SERVER
+    item-server:
+      path: /item/**
+      serverId: ITEM-SERVER
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 5000 #超时时长
+ribbon:
+  ConnectTimeout: 1000         #连接超时时长
+  ReadTimeout: 3500            #读取超时时长
+  MaxAutoRetries: 0            #重试次数
+  MaxAutoRetriesNextServer: 0  #切换服务重试次数
