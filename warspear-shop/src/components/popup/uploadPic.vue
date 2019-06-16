@@ -2,7 +2,7 @@
   <div id="uploadPic">
     <mt-popup class="popupUpload" v-model="popupVisible" popup-transition="popup-fade">
       <div class="center-d">
-        <input ref="filElem1" id="file" type="file" @change="getFile($event)" v-show="false" >
+        <input ref="filElem1" id="file" type="file" accept="image/png, image/jpg, image/jpeg" @change="getFile($event)" v-show="false" >
         <div class="img-d"><img :src="src" alt="点击选择" @click="choiceImg"></div>
         <div>
           <template v-if="UploadingProgress">

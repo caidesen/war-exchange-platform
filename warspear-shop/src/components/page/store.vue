@@ -60,7 +60,7 @@ export default {
             if (item.firstPic == null) {
               item.firstPic = require('@/assets/tupian.svg')
             } else {
-              item.firstPic = 'http://warshop.test.upcdn.net' + item.firstPic
+              item.firstPic = 'http://warshop.test.upcdn.net' + item.firstPic + '!storeCompress'
             }
             this.items.push(item)
           }
@@ -77,6 +77,10 @@ export default {
         }
       }).catch((error) => {
         errorHandle(error)
+        this.allLoaded = true
+        setTimeout(() => {
+          this.allLoaded = false
+        }, 3000)
       }).finally(() => {
         this.loading = false
       })
@@ -102,6 +106,14 @@ export default {
 </script>
 
 <style scoped>
+  #store{
+    background: rgba(244,244,244,0.96);
+  }
+  image[lazy=loading] {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+  }
   #wrapper {
     overflow: scroll;
   }

@@ -1,9 +1,9 @@
 <template>
   <div id="itemDetailed">
-    <template  v-if="$store.state.user.username===item.username">
-      <mt-button size="small" class="condition" @click="deleteItem"  plain >删除</mt-button>
+    <template v-cloak v-if="$store.state.user.username===item.username">
+      <mt-button size="small" class="condition" @click="deleteItem" plain >删除</mt-button>
     </template>
-    <template v-if="state">
+    <template v-cloak v-if="state">
       <div class="center">
         <span class="exchange-relationship">[{{item.exchangeRelationship==='买'?'收购':'出售'}}]</span>
         <span class="title" v-text="item.title"></span>
@@ -11,7 +11,8 @@
         <span>{{item.username}}</span>
       </div>
       <hr>
-      <p v-if="item.tags!==null">
+      <p>发布时间：{{item.createTime | dateFormate}}</p>
+      <p v-cloak v-if="item.tags!==null">
         <span>标签：</span>
         <span class="tab" v-for="(tag,i) in item.tags" :key="i" v-text="tag + ' '"></span>
       </p>
@@ -48,6 +49,7 @@
 <script>
 import { Toast, MessageBox } from 'mint-ui'
 import errorHandle from '@/utils/errorHandler'
+import {dateFormate} from '@/utils/dataFormat'
 export default {
   name: 'itemDetailed',
   data () {
@@ -81,6 +83,12 @@ export default {
     }).catch((e) => {
       errorHandle(e)
     })
+  },
+  filters: {
+    dateFormate (value) {
+      var date = new Date(value)
+      return dateFormate(date, 'yyyy-MM-dd hh:mm')
+    }
   },
   methods: {
     getQQ () {

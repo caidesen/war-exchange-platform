@@ -6,9 +6,13 @@ const addItem = {
     equipmentType: undefined,
     weaponType: undefined,
     className: undefined,
-    pics: undefined
+    pics: undefined,
+    uploaded: false
   },
   mutations: {
+    changeUploaded (state, newVal) {
+      state.uploaded = newVal
+    },
     changeServer (state, newVal) {
       state.server = newVal
     },
@@ -33,6 +37,8 @@ const addItem = {
       state.equipmentType = undefined
       state.weaponType = undefined
       state.weaponType = undefined
+      state.pics = undefined
+      state.uploaded = true
     }
   }
 }

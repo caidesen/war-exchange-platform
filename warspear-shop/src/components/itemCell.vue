@@ -1,30 +1,31 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <mt-cell @click.native="handleClick">
-    <template v-slot:title>
-      <div class="p img-d">
-        <img :src="item.firstPic" alt="图片">
-      </div>
-      <div class="p content">
+  <div id="item-cell">
+    <mt-cell @click.native="handleClick">
+      <template v-slot:title>
+        <div class="p img-d">
+          <img v-lazy.container="item.firstPic" alt="图片">
+        </div>
+        <div class="p content">
         <span class="small">
           <span class="title" style="color: midnightblue">[{{item.server}}.{{item.faction}}]</span>
           <span class="title" style="color: red">[{{item.exchangeRelationship==='卖'?'出':'收'}}]</span>
         </span>
-        <span class="title">{{item.title}}</span>
-        <div class="tabbar">
+          <span class="title">{{item.title}}</span>
+          <div class="tabbar">
           <span class="tab" v-for="(tab,i) in item.tags" :key="i">
             {{tab}}
           </span>
+          </div>
+          <div class="p">
+            <span v-if="item.priceRMB!=null" class="rmb">{{item.priceRMB}} CNY</span>
+            <span v-if="!(item.priceRMB==null||item.priceGold==null)" class="tab"> or</span>
+            <span v-if="item.priceGold!=null" class="gold"> {{item.priceGold}}k gold</span>
+          </div>
+          <span class="master">{{item.username}}</span>
         </div>
-        <div class="p">
-          <span v-if="item.priceRMB!=null" class="rmb">{{item.priceRMB}} CNY</span>
-          <span v-if="!(item.priceRMB==null||item.priceGold==null)" class="tab"> or</span>
-          <span v-if="item.priceGold!=null" class="gold"> {{item.priceGold}}k gold</span>
-        </div>
-        <span class="master">{{item.username}}</span>
-      </div>
-
-    </template>
-  </mt-cell>
+      </template>
+    </mt-cell>
+  </div>
 </template>
 
 <script>
@@ -49,6 +50,9 @@ export default {
 </script>
 
 <style scoped>
+  #item-cell{
+    padding-bottom: 7px;
+  }
   img {
     max-width: 100%;
     max-height: 100%;
@@ -56,7 +60,7 @@ export default {
   }
 
   .p {
-    padding: 10px;
+    padding: 8px;
   }
 
   .title {

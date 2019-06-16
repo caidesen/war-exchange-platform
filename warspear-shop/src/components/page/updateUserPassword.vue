@@ -1,8 +1,8 @@
 <template>
   <div id="updateUserPassword">
-    <mt-field label="旧的密码" placeholder="请输入旧密码" v-model="oldPassword" :state="oldPasswordState"></mt-field>
-    <mt-field label="新的密码" placeholder="请输入新密码" v-model="newPassword" :state="newPasswordState"></mt-field>
-    <mt-field label="确认密码" placeholder="请再此输入密码" v-model="newPasswordAgain" :state="newPasswordState"></mt-field>
+    <mt-field label="旧的密码" placeholder="请输入旧密码" type="password" v-model="oldPassword" :state="oldPasswordState"></mt-field>
+    <mt-field label="新的密码" placeholder="请输入新密码" type="password" v-model="newPassword" :state="newPasswordState"></mt-field>
+    <mt-field label="确认密码" placeholder="请重复输入密码" type="password" v-model="newPasswordAgain" :state="newPasswordState"></mt-field>
     <mt-button size="large" @click="update">确认修改</mt-button>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     update () {
-      if (this.newPassword === '' || this.newPasswordAgain !== this.newPassword) {
+      if (this.newPassword.trim() === '' || this.newPasswordAgain !== this.newPassword) {
         this.newPasswordState = 'warning'
       } else {
         this.newPasswordState = 'success'

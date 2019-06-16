@@ -29,18 +29,20 @@ export default {
   },
   methods: {
     checkUsername () {
-      this.axios({
-        url: '/auth/checkUsername',
-        method: 'post',
-        params: {
-          username: this.username.trim()
-        }
-      }).then(() => {
-        this.usernameState = 'success'
-      }).catch((error) => {
-        this.usernameState = 'warning'
-        errorHandle(error)
-      })
+      if (this.username.trim().length >= 2) {
+        this.axios({
+          url: '/auth/checkUsername',
+          method: 'post',
+          params: {
+            username: this.username.trim()
+          }
+        }).then(() => {
+          this.usernameState = 'success'
+        }).catch((error) => {
+          this.usernameState = 'warning'
+          errorHandle(error)
+        })
+      }
     },
     update () {
       //

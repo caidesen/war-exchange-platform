@@ -9,7 +9,8 @@ const user = {
     email: localStorage.email,
     qqNum: localStorage.qqNum,
     description: localStorage.description,
-    token: localStorage.token
+    token: localStorage.token,
+    state: localStorage.state === 'true'
   },
   mutations: {
     changeToken (state, newVal) {
@@ -22,11 +23,13 @@ const user = {
       state.email = newVal.email
       state.qqNum = newVal.qqNum
       state.description = newVal.description
+      state.state = newVal.state
       localStorage.username = newVal.username
       localStorage.userId = newVal.userId
       localStorage.email = newVal.email
       localStorage.qqNum = newVal.qqNum
       localStorage.description = newVal.description
+      localStorage.state = newVal.state
     }
   },
   actions: {

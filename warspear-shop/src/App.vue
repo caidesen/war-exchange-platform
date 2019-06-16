@@ -48,6 +48,8 @@ export default {
     background-color: #fafafa;
     -webkit-overflow-scrolling: touch;
     user-select: none;
+    margin:0;
+    padding:0;
   }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
