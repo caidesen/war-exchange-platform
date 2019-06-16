@@ -22,8 +22,13 @@
       </mt-cell>
     </template>
     <template v-if="$store.state.addItem.exchangeType !== '金币'">
-      <mt-field label="金币价格" placeholder="单位:k，可留空" v-model="priceGold"></mt-field>
-      <mt-field label="人民币价格" placeholder="单位:CNY，可留空" v-model="priceRMB"></mt-field>
+      <mt-cell class="p" title="价格另议">
+        <mt-switch v-model="priceCanDebate"></mt-switch>
+      </mt-cell>
+      <template v-if="!priceCanDebate">
+        <mt-field label="金币价格" placeholder="单位:k，可留空" v-model="priceGold"></mt-field>
+        <mt-field label="人民币价格" placeholder="单位:CNY，可留空" v-model="priceRMB"></mt-field>
+      </template>
     </template>
     <template v-if="$store.state.addItem.exchangeType !== '金币'">
       <mt-cell title="点击上传图片" is-link value="第一张将首页展示" @click.native="goUpload"></mt-cell>
@@ -91,6 +96,7 @@ export default {
       isSB: true,
       isSB2: '是',
       faction: 'ELF',
+      priceCanDebate: false,
       priceGold: '',
       priceRMB: '',
       tags: '',
@@ -139,6 +145,7 @@ export default {
         className: this.$store.state.addItem.className,
         priceGold: this.priceGold,
         priceRMB: this.priceRMB,
+        havePrice: !this.priceCanDebate, // 这里的和后端参数相反
         pics: pics,
         tags: this.tags,
         description: this.description

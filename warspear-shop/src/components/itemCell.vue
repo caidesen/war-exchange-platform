@@ -7,21 +7,24 @@
         </div>
         <div class="p content">
         <span class="small">
-          <span class="title" style="color: midnightblue">[{{item.server}}.{{item.faction}}]</span>
-          <span class="title" style="color: red">[{{item.exchangeRelationship==='卖'?'出':'收'}}]</span>
+          <span class="title" style="color: midnightblue" v-cloak>[{{item.server}}.{{item.faction}}]</span>
+          <span class="title" style="color: red" v-cloak>[{{item.exchangeRelationship==='卖'?'出':'收'}}]</span>
         </span>
-          <span class="title">{{item.title}}</span>
+          <span v-cloak class="title">{{item.title}}</span>
           <div class="tabbar">
           <span class="tab" v-for="(tab,i) in item.tags" :key="i">
             {{tab}}
           </span>
           </div>
-          <div class="p">
+          <div class="p" v-cloak v-if="item.havePrice">
             <span v-if="item.priceRMB!=null" class="rmb">{{item.priceRMB}} CNY</span>
             <span v-if="!(item.priceRMB==null||item.priceGold==null)" class="tab"> or</span>
-            <span v-if="item.priceGold!=null" class="gold"> {{item.priceGold}}k gold</span>
+            <span v-if="item.priceGold!=null" class="gold"> {{gold}}k gold</span>
           </div>
-          <span class="master">{{item.username}}</span>
+          <div v-else class="p">
+            <span class="rmb">价格另议</span>
+          </div>
+          <span class="master" v-cloak>{{item.username}}</span>
         </div>
       </template>
     </mt-cell>
@@ -37,6 +40,11 @@ export default {
   },
   data () {
     return {
+    }
+  },
+  computed: {
+    gold () {
+      return parseFloat(this.item.priceGold)
     }
   },
   name: 'itemCell',
