@@ -117,6 +117,9 @@ export default {
 </script>
 
 <style scoped>
+  #itemDetailed{
+    padding: 8px;
+  }
   .center{
     text-align: center;
   }
