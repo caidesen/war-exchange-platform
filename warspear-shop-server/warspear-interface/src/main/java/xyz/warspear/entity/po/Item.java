@@ -3,11 +3,9 @@ package xyz.warspear.entity.po;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import xyz.warspear.repository.ItemRepository;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -39,7 +37,8 @@ public class Item {
     private String tags;
     @Column(columnDefinition = "TEXT")
     private String description;
-    private Integer priceGold;
+    private boolean havePrice;
+    private Double priceGold;
     private Integer priceRMB;
     //修改时间
     @LastModifiedDate

@@ -33,8 +33,9 @@ public class ItemDetailedDto implements Serializable {
     private String username;
     private Integer userId;
     private String qqNum;
-    private Integer priceGold;
+    private String priceGold;
     private Integer priceRMB;
+    private boolean havePrice;
 
     public ItemDetailedDto(Item item) {
         this.itemId = item.getItemId();
@@ -54,12 +55,13 @@ public class ItemDetailedDto implements Serializable {
         this.userId = item.getUser().getUserId();
         this.username = item.getUser().getUsername();
         this.qqNum = item.getUser().getQqNum();
-        this.priceGold = item.getPriceGold();
+        Double priceGold = item.getPriceGold();
+        this.priceGold = String.format("%.2f",priceGold);
         this.priceRMB = item.getPriceRMB();
+        this.havePrice = item.isHavePrice();
         List<Pic> pics = item.getPics();
         for (Pic pic : pics) {
             this.pics.add(pic.getPicUri());
         }
     }
-
 }

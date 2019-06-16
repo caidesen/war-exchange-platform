@@ -20,7 +20,7 @@ public class ItemSimpleDto implements Serializable {
     private String[] tags;
     private String firstPic;
     private String username;
-    private Integer priceGold;
+    private String priceGold;
     private Integer priceRMB;
     private String faction;
     private String exchangeRelationship;
@@ -35,7 +35,8 @@ public class ItemSimpleDto implements Serializable {
         if (pics.size() != 0)
             this.firstPic = pics.get(0).getPicUri();
         this.username = item.getUser().getUsername();
-        this.priceGold = item.getPriceGold();
+        Double priceGold = item.getPriceGold();
+        this.priceGold = String.format("%.2f",priceGold);
         this.priceRMB = item.getPriceRMB();
         this.faction = item.getFaction();
         this.exchangeRelationship = item.getExchangeRelationship();

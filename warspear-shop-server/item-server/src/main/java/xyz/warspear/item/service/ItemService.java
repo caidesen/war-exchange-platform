@@ -148,7 +148,11 @@ public class ItemService {
         if (!item.getExchangeType().equals("金币"))
             if (itemPushDto.getPriceGold() == null && itemPushDto.getPriceRMB() == null)
                 throw new WarException(ExceptionEnums.FAIL_PRICE);
-        item.setPriceGold(itemPushDto.getPriceGold());
+        // 前端穿过来的是String
+        double priceGold = Double.parseDouble(itemPushDto.getPriceGold());
+        //四舍五入保留三位小数，留一位避免可能的误差
+        priceGold = (double) Math.round(priceGold * 1000) / 1000;
+        item.setPriceGold(priceGold);
         item.setPriceRMB(itemPushDto.getPriceRMB());
         //图片
         List<PicDto> picDtos = itemPushDto.getPics();

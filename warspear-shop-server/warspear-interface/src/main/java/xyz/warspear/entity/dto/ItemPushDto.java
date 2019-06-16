@@ -33,7 +33,7 @@ public class ItemPushDto implements Serializable {
     private List<PicDto> pics = new ArrayList<>();
     private String username;
     private Integer userId;
-    private Integer priceGold;
+    private String priceGold;
     private Integer priceRMB;
 }
 
