@@ -145,7 +145,8 @@ public class ItemService {
             item.setEmailBindingState(itemPushDto.isEmailBindingState());
         }
         // 交易类型不为金币，或没有勾选可议价，需输入金额
-        if (!item.getExchangeType().equals("金币") || item.isHavePrice())
+        item.setHavePrice(itemPushDto.isHavePrice());
+        if (!(item.getExchangeType().equals("金币") || !item.isHavePrice())){
             if (itemPushDto.getPriceGold() == null && itemPushDto.getPriceRMB() == null) {
                 throw new WarException(ExceptionEnums.FAIL_PRICE);
             } else {
@@ -162,6 +163,7 @@ public class ItemService {
                 item.setPriceGold(priceGold);
                 item.setPriceRMB(itemPushDto.getPriceRMB());
             }
+        }
         //图片
         List<PicDto> picDtos = itemPushDto.getPics();
         List<Pic> pics = new ArrayList<>();
