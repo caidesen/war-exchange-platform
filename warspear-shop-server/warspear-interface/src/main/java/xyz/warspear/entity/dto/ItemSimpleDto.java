@@ -24,6 +24,7 @@ public class ItemSimpleDto implements Serializable {
     private Integer priceRMB;
     private String faction;
     private String exchangeRelationship;
+    private boolean havePrice;
 
     public ItemSimpleDto(Item item) {
         this.itemId = item.getItemId();
@@ -40,5 +41,6 @@ public class ItemSimpleDto implements Serializable {
         this.priceRMB = item.getPriceRMB();
         this.faction = item.getFaction();
         this.exchangeRelationship = item.getExchangeRelationship();
+        this.havePrice = item.isHavePrice();
     }
 }

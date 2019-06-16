@@ -144,16 +144,24 @@ public class ItemService {
                     .orElseThrow(() -> new WarException(ExceptionEnums.FAIL_CLASS_NAME)));
             item.setEmailBindingState(itemPushDto.isEmailBindingState());
         }
-        // 如果交易类型为金币，可以不输入价格
-        if (!item.getExchangeType().equals("金币"))
-            if (itemPushDto.getPriceGold() == null && itemPushDto.getPriceRMB() == null)
+        // 交易类型不为金币，或没有勾选可议价，需输入金额
+        if (!item.getExchangeType().equals("金币") || item.isHavePrice())
+            if (itemPushDto.getPriceGold() == null && itemPushDto.getPriceRMB() == null) {
                 throw new WarException(ExceptionEnums.FAIL_PRICE);
-        // 前端穿过来的是String
-        double priceGold = Double.parseDouble(itemPushDto.getPriceGold());
-        //四舍五入保留三位小数，留一位避免可能的误差
-        priceGold = (double) Math.round(priceGold * 1000) / 1000;
-        item.setPriceGold(priceGold);
-        item.setPriceRMB(itemPushDto.getPriceRMB());
+            } else {
+                // 前端穿过来的是String
+                double priceGold = 0;
+                // 可能传过来的根本不是一个小数
+                try {
+                    priceGold = Double.parseDouble(itemPushDto.getPriceGold());
+                } catch (NumberFormatException e) {
+                    throw new WarException(ExceptionEnums.FAIL_PRICE);
+                }
+                //四舍五入保留三位小数，留一位避免可能的误差
+                priceGold = (double) Math.round(priceGold * 1000) / 1000;
+                item.setPriceGold(priceGold);
+                item.setPriceRMB(itemPushDto.getPriceRMB());
+            }
         //图片
         List<PicDto> picDtos = itemPushDto.getPics();
         List<Pic> pics = new ArrayList<>();
@@ -165,8 +173,6 @@ public class ItemService {
             } catch (Exception e) {
                 throw new WarException(ExceptionEnums.PIC_ERROR);
             }
-            if (one == null)
-                throw new WarException(ExceptionEnums.PIC_ERROR);
             pics.add(one);
         }
         item.setPics(pics);

@@ -35,5 +35,6 @@ public class ItemPushDto implements Serializable {
     private Integer userId;
     private String priceGold;
     private Integer priceRMB;
+    private boolean havePrice;
 }
 
