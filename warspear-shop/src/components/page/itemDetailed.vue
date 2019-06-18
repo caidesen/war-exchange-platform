@@ -26,6 +26,17 @@
         <p>职业：{{item.className}}</p>
         <p v-if="item.emailBindingState">死绑吗：{{item.emailBindingState?'是':'否'}}</p>
       </template>
+      <template v-if="item.exchangeType!=='金币'">
+        <div class="p" v-cloak v-if="item.havePrice">
+          <span>价格：</span>
+          <span v-if="item.priceRMB!=null" class="rmb">{{item.priceRMB}} CNY</span>
+          <span v-if="!(item.priceRMB==null||item.priceGold==null)" class="tab"> or</span>
+          <span v-if="item.priceGold!=null" class="gold">{{gold}}k gold</span>
+        </div>
+        <div v-else class="p">
+          <span class="rmb">价格另议</span>
+        </div>
+      </template>
       <mt-button size="small" style="width: 100%" plain @click.native="getQQ" ref="button">联系方式</mt-button>
       <mt-popup v-model="popupVisible" class="mint-popup-1" :style="{ top: buttonBottom + 'px' }">
         <p>
@@ -83,6 +94,11 @@ export default {
     }).catch((e) => {
       errorHandle(e)
     })
+  },
+  computed: {
+    gold () {
+      return parseFloat(this.item.priceGold)
+    }
   },
   filters: {
     dateFormate (value) {

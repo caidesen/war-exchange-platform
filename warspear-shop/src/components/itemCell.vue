@@ -16,14 +16,16 @@
             {{tab}}
           </span>
           </div>
-          <div class="p" v-cloak v-if="item.havePrice">
-            <span v-if="item.priceRMB!=null" class="rmb">{{item.priceRMB}} CNY</span>
-            <span v-if="!(item.priceRMB==null||item.priceGold==null)" class="tab"> or</span>
-            <span v-if="item.priceGold!=null" class="gold"> {{gold}}k gold</span>
-          </div>
-          <div v-else class="p">
-            <span class="rmb">价格另议</span>
-          </div>
+          <template v-if="item.exchangeType!=='金币'">
+            <div class="p" v-cloak v-if="item.havePrice">
+              <span v-if="item.priceRMB!=null" class="rmb">{{item.priceRMB}} CNY</span>
+              <span v-if="!(item.priceRMB==null||item.priceGold==null)" class="tab"> or</span>
+              <span v-if="item.priceGold!=null" class="gold"> {{gold}}k gold</span>
+            </div>
+            <div v-else class="p">
+              <span class="rmb">价格另议</span>
+            </div>
+          </template>
           <span class="master" v-cloak>{{item.username}}</span>
         </div>
       </template>
@@ -59,7 +61,7 @@ export default {
 
 <style scoped>
   #item-cell{
-    padding-bottom: 7px;
+    margin-bottom: 7px;
   }
   img {
     max-width: 100%;
